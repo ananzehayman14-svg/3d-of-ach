@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <meta charset="utf-8">
+    <title>Immersive Molecules - The ACh Journey</title>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.3.2/dist/aframe-environment-component.min.js"></script>
+  </head>
+  <body>
+    <a-scene renderer="antialias: true; colorManagement: true; foveationLevel: 3">
+      
+      <a-entity environment="preset: starry; ground: flat; groundColor: #050505; grid: dots; gridColor: #222"></a-entity>
+
+      <a-entity light="type: ambient; intensity: 0.4"></a-entity>
+      <a-entity light="type: point; intensity: 1; distance: 50; decay: 2" position="0 10 10"></a-entity>
+      <a-entity light="type: spot; color: #4CC3D9; intensity: 0.6" position="-5 5 -2" target="#nicotinic"></a-entity>
+      <a-entity light="type: spot; color: #EF2D5E; intensity: 0.6" position="5 5 -2" target="#muscarinic"></a-entity>
+
+      <a-entity id="nicotinic" position="-3.5 1.5 -6">
+        <a-gltf-model src="1UW6.glb" scale="0.06 0.06 0.06" 
+                      animation="property: rotation; to: 0 360 0; loop: true; dur: 25000; easing: linear">
+        </a-gltf-model>
+        <a-text value="Nicotinic Receptor (nAChR)" position="0 -2.5 0" align="center" width="4" color="#4CC3D9"></a-text>
+        
+        <a-entity id="ion-stream">
+           <a-sphere radius="0.06" color="#00FF44" position="0 3 0" 
+                     animation="property: position; from: 0 3 0; to: 0 -3 0; dur: 1500; loop: true; easing: linear">
+           </a-sphere>
+           <a-sphere radius="0.06" color="#00FF44" position="0.1 4 -0.1" 
+                     animation="property: position; from: 0.1 4 -0.1; to: 0.1 -2 0.1; dur: 1800; loop: true; easing: linear; delay: 400">
+           </a-sphere>
+           <a-sphere radius="0.06" color="#00FF44" position="-0.1 5 0.1" 
+                     animation="property: position; from: -0.1 5 0.1; to: -0.1 -2.5 -0.1; dur: 2000; loop: true; easing: linear; delay: 800">
+           </a-sphere>
+        </a-entity>
+      </a-entity>
+
+      <a-entity id="muscarinic" position="3.5 1.5 -6">
+        <a-gltf-model src="4DAJ.glb" scale="0.06 0.06 0.06" 
+                      animation="property: rotation; to: 0 -360 0; loop: true; dur: 25000; easing: linear">
+        </a-gltf-model>
+        <a-text value="Muscarinic Receptor (mAChR)" position="0 -2.5 0" align="center" width="4" color="#EF2D5E"></a-text>
+      </a-entity>
+
+      <a-entity id="ach-actor" position="0 1.5 -4">
+        <a-gltf-model src="acetylcholine.glb" scale="0.25 0.25 0.25"
+                      animation__rotate="property: rotation; to: 360 360 0; loop: true; dur: 6000; easing: linear"
+                      animation__move="property: position; 
+                                       dir: alternate; 
+                                       dur: 6000; 
+                                       easing: easeInOutQuad; 
+                                       loop: true; 
+                                       values: 0 1.5 -4; -3.2 1.5 -5.5; 0 1.5 -4; 3.2 1.5 -5.5; 0 1.5 -4">
+        </a-gltf-model>
+        <a-text value="Acetylcholine (Ligand)" position="0 0.6 0" align="center" width="2.5" color="white"></a-text>
+      </a-entity>
+
+      <a-entity camera look-controls wasd-controls position="0 1.6 0">
+        <a-cursor fuse="false" raycaster="objects: .interactable" color="#2E8B57"></a-cursor>
+      </a-entity>
+
+    </a-scene>
+  </body>
+</html>
